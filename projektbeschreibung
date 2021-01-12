@@ -1,0 +1,62 @@
+Hello Anja, 
+Please find a proposal for very interesting code project below. It would give you an opportunity to get familiar with the latest NLP’s frameworks which suppose to generate the state of the art results - in our case the sentence alignment. For in-depth briefing I would suggest a meeting/call/teams. Please let me know if you have an interest for this project. 
+
+Usefulness of sentence embeddings for the sentence alignment
+
+Overview
+
+Sentence embedding is a step further toward encoding of the meaning of the whole sentence compare to the word embeddings. The downstream tasks such as semantic textual similarity or paraphrase detection should benefit from more rich & contextual embedding. Therefore, usage of sentence embeddings promises considerable improvement compared to the previous sentence alignment approaches.
+
+Objectives:
+
+To design and develop a command line system which
+
+- that has prepared support for sentence embedding from “suggested framework”
+
+- that accepts following input’s arguments:
+
+• a file with original text
+
+• a file with simplify text
+
+• a file with queries to evaluate
+
+• a sentence embedding framework to use
+
+- that generates output with clustered sentences by similarities (using k-mean clustering & hierarchical clustering)
+ generated respectively for the original & simplify text
+# see sentence_transformers/examples/applications, kmeans, agglomerative (hierarchical), fast_clustering
+
+- that generates output with semantic textual similarity and paraphrase detection for sentence from queries
+to evaluate
+
+To make the code available 
+
+To document the work done
+
+Suggested frameworks:
+
+- Universal sentence encoder
+
+https://tfhub.dev/google/collections/universal-sentence-encoder/1
+
+- InferSent
+
+https://github.com/facebookresearch/InferSent
+
+- Sentence-BERT
+
+https://github.com/UKPLab/sentence-transformers
+
+- Sent2vec
+
+https://github.com/epfml/sent2vec
+
+programming language: Python
+
+Best regards
+Marek
+
+
+Sent from my iPad
+
