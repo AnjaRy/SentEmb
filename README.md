@@ -10,6 +10,8 @@ COMMAND
 
 Before using this file, make sure you want everything which is downloaded. Check if the models you need are selected. Note that this virtual environment need XXX space.
 
+Also, requirements.txt is given
+
 ### Models
 As a standard some pretrained models are downloaded. There are many other available under:
 
@@ -17,6 +19,8 @@ LINK
 LINK
 LINK
 LINK
+
+Models for sent2vec have to be downloaded manually and are expected to be in the sent2vec folder
 
 ### CONFIG
 
