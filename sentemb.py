@@ -9,6 +9,12 @@ from universal_sentence_encoder_model import universal_sentence_encoder
 
 
 def prepare_sentences(input_file):
+    """
+    Read an prepare sentences for embedding
+    :param input_file: string, name of inputfile
+    :return list of sentences
+    """
+
     with open(input_file) as i:
         data = i.readlines()
     sentences = [line.strip() for line in data]
@@ -16,6 +22,13 @@ def prepare_sentences(input_file):
 
 
 def embed_sentences(model, input, outputfile):
+    """
+    Calls requested embedding
+    :param model: string, which model to call
+    :param input: list of sentences
+    :param outputfile: name of outputfile to write embedding in
+    """
+
     if model == 'infersent':
         infer_sent(input, outputfile)
     elif model == 'sentence_transformers':
@@ -30,6 +43,8 @@ def main(argv):
     inputfile = ''
     outputfile = ''
     model = ''
+
+    # Handles input from command line
     try:
         opts, args = getopt.getopt(argv, "hm:i:o:")
     except getopt.GetoptError:

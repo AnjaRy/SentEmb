@@ -16,6 +16,12 @@ from universal_sentence_encoder_model import universal_sentence_encoder
 
 
 def prepare_sentences(input_file):
+    """
+    reads sentences from file and prepares them for further processing
+    :param input_file: string of file name with queries
+    :return: list of all sentences
+    """
+
     sentences =[]
     with open(input_file) as i:
         data = i.readlines()
@@ -28,6 +34,14 @@ def prepare_sentences(input_file):
 
 
 def embed_sentences(model, input, outputfile):
+    """
+    embeds all sentences given a model
+    :param model: string, which model to embed sentences
+    :param input: list of sentences
+    :param outputfile:string, name of temporary outputfile for embedding
+    """
+
+    # Call the right model, make embeddings
     if model == 'infersent':
         infer_sent(input, outputfile)
     elif model == 'sentence_transformers':
@@ -39,14 +53,24 @@ def embed_sentences(model, input, outputfile):
 
 
 def calculate_distances(inputfile):
+    """
+    calcualtes the distance of each sentence pair given the embedding
+    :param inputfile: name of embeddingfile
+    :return: list with distances for each pair
+    """
+
+    # Read embedding file
     embedding = np.loadtxt(inputfile, delimiter=',')
     distances = []
 
+    # calculate distance for each sentence pair
     for i in range(0, len(embedding)-1, 2):
         sentence1 = embedding[i]
         sentence2 = embedding[i+1]
 
         cos_sim = np.dot(sentence1, sentence2) / (np.linalg.norm(sentence1) * np.linalg.norm(sentence2))
+
+        # Add distance to list
         distances.append((float(cos_sim), i, i+1))
     return distances
 
@@ -59,6 +83,7 @@ def main(argv):
     paraphrase_detection = False
     top_k = 100
 
+    # Handle the command line input, checks if valid
     try:
         opts, args = getopt.getopt(argv, "hm:i:o:k:")
     except getopt.GetoptError:
@@ -82,18 +107,23 @@ def main(argv):
             paraphrase_detection = True
             top_k = int(arg)
 
+    # Read sentences
     input = prepare_sentences(inputfile)
 
+    # embed sentences
     embed_sentences(model, input, tmp_outputfile)
 
+    # Calculate distances of pairs
     distances = calculate_distances(tmp_outputfile)
 
+    # If only k best are requested sort them out
     if paraphrase_detection:
         distances.sort(reverse=True)
         distances = distances[:top_k]
     else:
         pass
 
+    # Write all pairs with their distance to outputfile
     # c=0
     with open(outputfile, 'w') as o:
          for distance, id1, id2 in distances:

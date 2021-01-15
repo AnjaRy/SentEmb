@@ -6,6 +6,12 @@ from configparser import ConfigParser
 import numpy as np
 
 def read_config_file(file):
+    """
+    reads config file and gives back all relevant parameters
+    :param file: config-file to read
+    :return: strings of parameters taken from config-file
+    """
+
     config = ConfigParser()
     config.read(file)
 
@@ -24,6 +30,12 @@ def read_config_file(file):
     return model_path, w2v_path, param_dict
 
 def infer_sent(input, outputfile):
+    """
+    Embeds sentences with Infersent
+    :param input: list of sentences
+    :param outputfile: string, name of outputfile to write embeddings in
+    """
+
     model_path, w2v_path, param_dict = read_config_file("config.ini")
     infersent = InferSent(param_dict)
     infersent.load_state_dict(torch.load(model_path))

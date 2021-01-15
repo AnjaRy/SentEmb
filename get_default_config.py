@@ -1,5 +1,3 @@
-# add more parameters for other models
-
 import configparser
 
 config = configparser.ConfigParser()
