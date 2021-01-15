@@ -66,6 +66,7 @@ git clone https://github.com/UKPLab/sentence-transformers
 cd sentence-transformers || exit 1
 pip3 install .
 cd ..
+mv sentence-transformers sentence_transformers
 # possible models for sentence transformers: https://www.sbert.net/docs/pretrained_models.html
 
 # Install sent2vec
